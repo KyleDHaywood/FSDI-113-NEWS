@@ -13,7 +13,8 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 from pathlib import Path
 from environs import Env
 
-env = Env.read_env()
+env = Env()
+env.read_env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -131,3 +132,8 @@ AUTH_USER_MODEL='accounts.CustomUser'
 
 # EMAIL
 EMAIL_BACKEND = ('django.core.mail.backends.%s.EmailBackend' % env.str("EMAIL_BACKEND", default='smtp'))
+
+EMAIL_PORT=587
+EMAIL_USE_TLS=True
+EMAIL_HOST=env.str("EMAIL_HOST")
+EMAIL_HOST_USER=env.str("EMAIL_HOST_USER")
